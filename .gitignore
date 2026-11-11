@@ -1,0 +1,17 @@
+# LaTeX intermediate files
+*.aux
+*.dvi
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.xdv
+
+# Local previews and editor files
+.DS_Store
+*.swp
+*~
