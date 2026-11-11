@@ -1,14 +1,13 @@
 % !TEX program = latex
 % 固定结构模板：搜索【并逐项替换。默认 16 页正文 + 4 页附录。
-% 不要通过增加正文小字来保留额外内容；把细节移到附录。
-\documentclass[aspectratio=169,11pt,fontset=ubuntu]{ctexbeamer}
-\usepackage{cvpp_talk}
+% 不要靠缩小正文字号保留额外内容；把细节移到附录。
+\documentclass[aspectratio=169,11pt,fontset=fandol]{ctexbeamer}
+\usepackage{ctextalk}
 
 \title{【研究问题式标题】}
 \subtitle{【研究对象与方法定位】}
 \author{【姓名 · 单位 / 研究组】}
 \date{【汇报日期】}
-\newcommand{\fillin}[1]{\textcolor{Warm}{【#1】}}
 
 \begin{document}
 
@@ -17,7 +16,7 @@
 \note{用 30 秒说明研究问题，不念完整标题和全部样本数字。}
 
 % 02 固定目录：三个研究问题分别对应第 11–13 页。
-\agendaslide{【研究问题一】}{【研究问题二】}{【研究问题三】}
+\agendathree{【研究问题一】}{【研究问题二】}{【研究问题三】}
 
 % 03 任务与现象：一张真实图/刺激 + 最少必要规则。
 \begin{frame}{【一句话说明任务或研究现象】}

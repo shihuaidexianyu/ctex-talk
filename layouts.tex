@@ -1,0 +1,185 @@
+% !TEX program = latex
+% 通用版式库：复制需要的 frame 到自己的汇报，不必按本文件顺序使用。
+\documentclass[aspectratio=169,11pt,fontset=fandol]{ctexbeamer}
+\usepackage{ctextalk}
+
+\title{【研究问题式标题】}
+\subtitle{【研究对象与方法定位】}
+\author{【姓名 · 单位 / 研究组】}
+\date{【汇报日期】}
+
+\begin{document}
+
+% 01 封面。
+\coverslide{【一行样本规模或方法定位】}
+
+% 02 两问目录；三问目录见 template.tex 的 \agendathree。
+\agendatwo{【研究问题一】}{【研究问题二】}
+
+% 03 全宽主图：适合核心结果或图中文字较多的情况。
+\fullfigureslide
+  {【主图支持的结论句】}
+  {figures/placeholder.pdf}
+  {【横轴含义与单位】}
+  {【纵轴含义与单位】}
+  {【点、线、误差带与颜色含义】}
+  {【本图意味着什么】}
+  {【模型、样本、区间与数据来源】}
+
+% 04 左图右文：适合任务刺激、案例和少量解释；复杂统计图改用全宽。
+\begin{frame}{【一句话说明任务或案例】}
+  \begin{columns}[T,onlytextwidth]
+    \column{.43\textwidth}
+      \includegraphics[width=\linewidth,height=.48\textheight,keepaspectratio]{figures/placeholder.pdf}\par
+      \visualnote{【对象、条件、箭头或颜色含义。】}
+    \column{.52\textwidth}
+      {\color{Accent}第一部分}\par
+      \fillin{本页必须知道的第一条信息。}\par
+      \vspace{.8em}
+      {\color{Accent}第二部分}\par
+      \fillin{与第一部分平行的第二条信息。}\par
+      \vspace{.8em}
+      {\color{Accent}第三部分}\par
+      \fillin{最多保留第三个短点。}
+  \end{columns}
+  \source{【图片、案例或任务来源。】}
+\end{frame}
+
+% 05 双图比较：两张图必须共同回答一个问题，并共享坐标口径。
+\begin{frame}{【两个条件或两组结果的关键差异】}
+  \begin{columns}[T,onlytextwidth]
+    \column{.48\textwidth}
+      \centering{\color{Accent}A\hspace{.4em}【条件一】}\par
+      \includegraphics[width=\linewidth,height=.39\textheight,keepaspectratio]{figures/placeholder.pdf}
+    \column{.48\textwidth}
+      \centering{\color{Accent}B\hspace{.4em}【条件二】}\par
+      \includegraphics[width=\linewidth,height=.39\textheight,keepaspectratio]{figures/placeholder.pdf}
+  \end{columns}
+  \figurecaption{【两图共同的横轴与单位】}{【两图共同的纵轴与单位】}{A / B：【条件】；点线颜色：【含义】}
+  \takeaway{【由两图直接比较得到的一个结论。】}
+  \source{【统一样本、模型和区间口径；若不同必须明确说明。】}
+\end{frame}
+
+% 06 双栏定义：两栏回答同一组问题。
+\begin{frame}{【两个核心概念如何平行定义】}
+  \vspace{.8em}
+  \begin{columns}[T,onlytextwidth]
+    \column{.47\textwidth}
+      {\color{Accent}概念一}\par
+      \fillin{对象、方向和单位。}\par
+      \vspace{.6em}
+      \centering{\Large $\displaystyle \text{【公式一】}$}\par
+      \vspace{.6em}
+      \fillin{一个具体例子与边界。}
+    \column{.47\textwidth}
+      {\color{Accent}概念二}\par
+      \fillin{对象、方向和单位。}\par
+      \vspace{.6em}
+      \centering{\Large $\displaystyle \text{【公式二】}$}\par
+      \vspace{.6em}
+      \fillin{一个可比例子与边界。}
+  \end{columns}
+  \source{【工具、版本、参数或文献来源。】}
+\end{frame}
+
+% 07 三卡并列：三类信息或三个步骤。
+\begin{frame}{【三类信息分别承担什么作用】}
+  \vspace{1em}
+  \begin{columns}[T,onlytextwidth]
+    \column{.30\textwidth}
+      \bignumber{01}{【类别一】}
+      \fillin{一句解释。}
+    \column{.30\textwidth}
+      \bignumber{02}{【类别二】}
+      \fillin{一句解释。}
+    \column{.30\textwidth}
+      \bignumber{03}{【类别三】}
+      \fillin{一句解释。}
+  \end{columns}
+  \takeaway{【三类信息共同支持的一个结论。】}
+\end{frame}
+
+% 08 横向流程：输入 → 处理 → 输出。
+\begin{frame}{【分析如何把输入转成研究证据】}
+  \vspace{1.2em}
+  \begin{columns}[c,onlytextwidth]
+    \column{.27\textwidth}
+      \centering\flowbox{输入}{\fillin{数据或行为}\par\vspace{.3em}\fillin{条件}}
+    \column{.06\textwidth}\centering{\color{Accent}\Large $\rightarrow$}
+    \column{.36\textwidth}
+      \centering\flowbox{处理 / 模型}{\fillin{核心操作}\par\vspace{.3em}{\small\fillin{控制或参数}}}
+    \column{.06\textwidth}\centering{\color{Accent}\Large $\rightarrow$}
+    \column{.23\textwidth}
+      \centering\flowbox{输出}{\fillin{估计或预测}}
+  \end{columns}
+  \takeaway{【输入、比较对象和输出的关键关系。】}
+\end{frame}
+
+% 09 公式与符号翻译。
+\begin{frame}{【模型用哪些信息解释或预测结果】}
+  \vspace{.5em}
+  \centering
+  \fcolorbox{Accent!25}{Accent!5}{%
+    \begin{minipage}[c][2.0cm][c]{.82\linewidth}
+      \centering{\Large $\displaystyle \text{【核心公式】}$}
+    \end{minipage}}\par
+  \vspace{.7em}
+  {\small
+  \begin{tabular}{@{}l p{8.8cm}@{}}
+    \toprule
+    符号 & 操作含义 \\
+    \midrule
+    【符号一】 & 【结果变量或分析对象】 \\
+    【符号二】 & 【核心解释变量】 \\
+    【符号三】 & 【控制、随机效应或比较集合】 \\
+    \bottomrule
+  \end{tabular}}
+  \takeaway{【估计目标与比较范围。】}
+\end{frame}
+
+% 10 对照表：只保留一个共同评价口径。
+\begin{frame}{【对照设计如何区分不同解释】}
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}p{3.2cm} p{5.2cm} p{4.6cm}@{}}
+    \toprule
+    对照 / 模型 & 相对新增的信息 & 共同评价口径 \\
+    \midrule
+    【基线】 & 【已有控制与约束】 & 【指标、单位和样本】 \\
+    【对照一】 & 【新增变量一】 & 【同一评价口径】 \\
+    【对照二】 & 【新增变量二或交互】 & 【同一评价口径】 \\
+    \bottomrule
+  \end{tabular}
+  \visualnote{【单位、分母、拟合与排除规则。】}
+  \takeaway{【对照能区分什么，不能区分什么。】}
+\end{frame}
+
+% 11 三个关键数字：只放后文反复使用的量。
+\begin{frame}{【三个数字界定分析样本】}
+  \vspace{1.4em}
+  \begin{columns}[T,onlytextwidth]
+    \column{.30\textwidth}
+      \centering\bignumber{【$N_1$】}{【分析单位一】}
+      \centering\fillin{一句口径。}
+    \column{.30\textwidth}
+      \centering\bignumber{【$N_2$】}{【分析单位二】}
+      \centering\fillin{一句口径。}
+    \column{.30\textwidth}
+      \centering\bignumber{【$N_3$】}{【覆盖或质量指标】}
+      \centering\fillin{一句口径。}
+  \end{columns}
+  \source{【三个数字必须来自同一版本结果，并注明分母。】}
+\end{frame}
+
+% 12 三点边界或结论；两点版本见 short.tex。
+\threepointslide{【三条边界或三条结论】}
+  {【第一点】}{【一句解释。】}
+  {【第二点】}{【一句解释。】}
+  {【第三点】}{【一句解释。】}
+
+% 13 章节页：短报告通常可删。
+\sectionslide{01 ·【章节名】}{【本章节回答什么】}{【步骤一 $\rightarrow$ 步骤二 $\rightarrow$ 步骤三】}
+
+% 14 结束页。
+\closingslide{谢谢，欢迎讨论}{【一句话核心结论】}
+
+\end{document}

@@ -1,10 +1,8 @@
-% 中文研究汇报的本地 Beamer 样式。
-% 使用方式：\documentclass[aspectratio=169,11pt,fontset=ubuntu]{ctexbeamer}
-%           \usepackage{cvpp_talk}
+% ctextalk：中文学术汇报的 Beamer 组件与版式。
+% 文档类由入口文件指定；推荐 16:9、11pt，并选择可用的 ctex 中文字体集。
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{cvpp_talk}[2026/11/11 Chinese research talk style]
+\ProvidesPackage{ctextalk}[2026/11/11 v0.2 Chinese academic talk components]
 
-% 与现有汇报一致：metropolis + Fira Sans + Noto Sans CJK（ubuntu fontset）。
 \usetheme[progressbar=frametitle,sectionpage=none]{metropolis}
 \RequirePackage[sfdefault,lining]{FiraSans}
 \RequirePackage[italic]{mathastext}
@@ -16,12 +14,12 @@
 \RequirePackage{booktabs}
 \RequirePackage{graphicx}
 
-% 主色只承担强调；需要区分三个数据系列时再使用后三种颜色。
+% 文字强调色与数据系列色分开：前者保证浅底上的文字对比度。
 \definecolor{Ink}{HTML}{0B0B0B}
 \definecolor{Muted}{HTML}{626262}
 \definecolor{Surface}{HTML}{FCFCFB}
-\definecolor{Accent}{HTML}{2A78D6}
-\definecolor{Warm}{HTML}{EB6834}
+\definecolor{Accent}{HTML}{2166B1}
+\definecolor{Warm}{HTML}{B64A1D}
 \definecolor{SeriesA}{HTML}{2A78D6}
 \definecolor{SeriesB}{HTML}{EB6834}
 \definecolor{SeriesC}{HTML}{1BAF7A}
@@ -41,7 +39,8 @@
 \setbeamerfont{subtitle}{size=\large}
 \setbeamerfont{frametitle}{size=\large,series=\bfseries}
 \setbeamerfont{framesubtitle}{size=\small}
-\setbeamerfont{footline}{size=\tiny}
+% 8pt 在 160mm 宽 Beamer 页面等效于常见宽屏幻灯片约 17pt。
+\setbeamerfont{footline}{size=\footnotesize}
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{itemize item}{\textcolor{Accent}{--}}
 \setbeamertemplate{itemize subitem}{\textcolor{Muted}{--}}
@@ -49,26 +48,41 @@
 \setlength{\leftmargini}{1.2em}
 \setlength{\leftmarginii}{1.1em}
 
-% 图前的一句话只解释读法或页面任务，不重复标题中的结论。
+% 模板中的待填内容；正式汇报前应全部替换或删除。
+\newcommand{\fillin}[1]{\textcolor{Warm}{【#1】}}
+
+% 图前的一句任务说明，不重复标题中的结论。
 \newcommand{\lead}[1]{{\small #1\par}\vspace{.45em}}
 
-% 来源、分母和估计边界；只保留理解本页所必需的一行。
-\newcommand{\source}[1]{\par\vspace{.2em}{\tiny\color{Muted}#1\par}}
+% 数据图注：图内坐标标签仍然必要，本命令负责补充读图口径。
+\newcommand{\figurecaption}[3]{%
+  \par\vspace{.15em}%
+  {\footnotesize\color{Muted}\textbf{图注}\quad 横轴：#1；纵轴：#2；#3\par}%
+}
 
-% 图后的唯一结论。避免在同页重复放置多个 takeaway。
+% 流程图、任务图和表格的说明；没有坐标轴时不伪造横纵轴。
+\newcommand{\visualnote}[1]{%
+  \par\vspace{.15em}%
+  {\footnotesize\color{Muted}\textbf{说明}\quad #1\par}%
+}
+
+% 来源与口径也使用可读字号，不能作为“看不清也没关系”的例外。
+\newcommand{\source}[1]{\par\vspace{.2em}{\footnotesize\color{Muted}#1\par}}
+
+% 图后的唯一结论。
 \newcommand{\takeaway}[1]{%
-  \par\vspace{.45em}%
+  \par\vspace{.4em}%
   {\color{Accent}\rule[-.18em]{2pt}{1.15em}}%
   \hspace{.45em}{\large #1}\par%
 }
 
-% 三个以内的关键数字；第二个参数是短标签。
+% 关键数字：数值 + 短标签。
 \newcommand{\bignumber}[2]{%
   {\color{Accent}\fontsize{25}{28}\selectfont #1}\par
   \vspace{.15em}{\small\color{Muted}#2}\par%
 }
 
-% 流程图中的统一卡片。第一个参数是层级标签，第二个参数是主体。
+% 流程卡片：层级标签 + 主体。
 \newcommand{\flowbox}[2]{%
   \fcolorbox{Accent!25}{Accent!5}{%
     \begin{minipage}[c][2.8cm][c]{.82\linewidth}
@@ -79,27 +93,7 @@
     \end{minipage}}%
 }
 
-% 章节页不堆目录；只交代接下来回答什么。
-\newcommand{\sectionslide}[3]{%
-  \begin{frame}[plain]
-    \vfill
-    {\small\color{Accent}#1}\par
-    \vspace{.5em}
-    {\LARGE\bfseries #2}\par
-    \vspace{.7em}
-    {\large\color{Muted}#3}\par
-    \vfill
-  \end{frame}%
-}
-
-% 数据图图注：固定写在图下，明确横轴、纵轴和其他视觉编码。
-% 示意图没有坐标轴时，不使用本命令，改写一句箭头/颜色含义。
-\newcommand{\figurecaption}[3]{%
-  \par\vspace{.15em}%
-  {\footnotesize\color{Muted}\textbf{图注}\quad 横轴：#1；纵轴：#2；#3\par}%
-}
-
-% 固定封面。标题元数据仍在 main/template 顶部统一填写。
+% 封面。
 \newcommand{\coverslide}[1]{%
   \begin{frame}[plain]
     \vspace{2.2em}
@@ -118,8 +112,21 @@
   \end{frame}%
 }
 
-% 固定目录：只列三个研究问题，不使用章节名堆砌的传统目录。
-\newcommand{\agendaslide}[3]{%
+% 两问目录：用于短报告。
+\newcommand{\agendatwo}[2]{%
+  \begin{frame}{本次汇报回答两个问题}
+    \vspace{1.4em}
+    \begin{columns}[T,onlytextwidth]
+      \column{.44\textwidth}\bignumber{01}{#1}
+      \column{.44\textwidth}\bignumber{02}{#2}
+    \end{columns}
+    \vfill
+    \centering{\color{Muted}任务与方法 $\rightarrow$ 结果 $\rightarrow$ 结论}
+  \end{frame}%
+}
+
+% 三问目录：用于默认研究汇报。
+\newcommand{\agendathree}[3]{%
   \begin{frame}{本次汇报回答三个问题}
     \vspace{1.4em}
     \begin{columns}[T,onlytextwidth]
@@ -132,21 +139,32 @@
   \end{frame}%
 }
 
-% 固定全宽结果页：结论标题 → 主图 → 坐标图注 → take-home → 来源。
-% 参数：标题、图路径、横轴、纵轴、点线颜色含义、take-home、来源。
-\newcommand{\fullfigureslide}[7]{%
-  \begin{frame}{#1}
+% 全宽结果页：结论标题 → 主图 → 图注 → take-home → 来源。
+% 可选参数为图的最大高度；长标题或两行图注时可适当调小。
+\newcommand{\fullfigureslide}[8][.44\textheight]{%
+  \begin{frame}{#2}
     \vspace{0pt}
     \centering
-    \includegraphics[width=.90\textwidth,height=.48\textheight,keepaspectratio]{#2}\par
-    \figurecaption{#3}{#4}{#5}
-    \takeaway{#6}
-    \source{#7}
+    \includegraphics[width=.92\textwidth,height=#1,keepaspectratio]{#3}\par
+    \figurecaption{#4}{#5}{#6}
+    \takeaway{#7}
+    \source{#8}
   \end{frame}%
 }
 
-% 固定三点页：用于边界或最终结论，不额外添加第四点。
-% 参数：页标题、三个小标题及其正文。
+% 两点页：用于短报告结论。
+\newcommand{\twopointslide}[5]{%
+  \begin{frame}{#1}
+    \vspace{1em}
+    {\large\color{Accent}1\hspace{.5em}#2}\par
+    {\large #3}\par
+    \vspace{1.2em}
+    {\large\color{Accent}2\hspace{.5em}#4}\par
+    {\large #5}\par
+  \end{frame}%
+}
+
+% 三点页：用于边界或最终结论。
 \newcommand{\threepointslide}[7]{%
   \begin{frame}{#1}
     \vspace{.5em}
@@ -161,7 +179,20 @@
   \end{frame}%
 }
 
-% 结尾保留研究结论，而不是只写“谢谢”。
+% 章节页。
+\newcommand{\sectionslide}[3]{%
+  \begin{frame}[plain]
+    \vfill
+    {\small\color{Accent}#1}\par
+    \vspace{.5em}
+    {\LARGE\bfseries #2}\par
+    \vspace{.7em}
+    {\large\color{Muted}#3}\par
+    \vfill
+  \end{frame}%
+}
+
+% 结束页保留研究结论，而不是只写“谢谢”。
 \newcommand{\closingslide}[2]{%
   \begin{frame}[plain]
     \vfill
